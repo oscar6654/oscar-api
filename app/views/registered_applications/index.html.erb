@@ -1,0 +1,22 @@
+<h1>Registered Websites</h1>
+<div class='row'>
+  <div class='col-md-8'>
+    <table class="table table-striped">
+      <tbody>
+        <% @registered_applications.each do |website| %>
+          <tr>
+            <td><%= website.name if website.name %></td>
+            <td><%= website.URL if website.URL %></td>
+            <td>
+              <span class="right">
+              <%= link_to " Edit", edit_registered_application_path(website), class: 'btn btn-success glyphicon glyphicon-edit' %>
+              <%= link_to " Delete", edit_registered_application_path(website), method: :delete, id: 'delete', class: 'btn btn-danger glyphicon glyphicon-remove' %>
+            </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+     <%= link_to "Add New Website", new_registered_application_path, class: 'btn btn-success' %>
+  </div>
+</div>
