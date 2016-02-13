@@ -35,8 +35,22 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def show
+    @registered_application = RegisteredApplication.find(params[:id])
+    @events = @registered_application.events.group_by(&:name)
   end
 
+  def destroy
+    @registered_application = RegisteredApplication.find(params[:id])
+    name = @registered_application.name
+
+    if @registered_application.destroy
+      flash[:notice] = "\"#{name}\" was deleted successfully."
+      redirect_to root_path
+    else
+      flash[:error] = "There was an error deleting the URL. Please try again."
+      redirect_to root_path
+    end
+  end
   private
 
   def registered_applications_params
