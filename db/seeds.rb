@@ -14,7 +14,7 @@ test.save
 test_app = RegisteredApplication.new(
   user: test,
   name: 'Example App',
-  URL: 'http://exampleapp.com'
+  url: 'http://exampleapp.com'
   )
 
 test_app.save
@@ -23,7 +23,7 @@ test_app.save
   registered_application = RegisteredApplication.create!(
     user: test,
     name: Faker::App.name,
-    URL: Faker::Internet.url
+    url: Faker::Internet.url
     )
 end
 

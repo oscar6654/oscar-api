@@ -47,13 +47,13 @@ class RegisteredApplicationsController < ApplicationController
       flash[:notice] = "\"#{name}\" was deleted successfully."
       redirect_to root_path
     else
-      flash[:error] = "There was an error deleting the URL. Please try again."
+      flash[:error] = "There was an error deleting the url. Please try again."
       redirect_to root_path
     end
   end
   private
 
   def registered_applications_params
-    params.require(:registered_application).permit(:name, :URL)
+    params.require(:registered_application).permit(:name, :url)
   end
 end

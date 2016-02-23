@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-8">
     <h1><%= @registered_application.name %></h1>
-    <h3><%= link_to @registered_application.URL, @registered_application.URL, :target => "_blank" %></h3>
+    <h3><%= link_to @registered_application.url, @registered_application.url, :target => "_blank" %></h3>
   <div>
   <div class='row'>
     <div class='col-md-8'>
@@ -33,5 +33,41 @@
           <%= link_to "Back to Website List", root_path, class: 'btn btn-primary' %>
       </div>
     </div>
+
+    <div class="row">
+  <div class="col-md-12">
+    <h4>To track application events add the following code to your application.js file:</h4>
+    <code>
+      var blocmetrics = {};<br/>
+      blocmetrics.report = function(eventName){<br/>
+        &ensp;var event = { name: eventName };<br/>
+        <br/>
+        &ensp;var request = new XMLHttpRequest();<br/>
+        &ensp;request.open("POST", "http://oscar-api.herokuapp.com/api/events", true);<br/>
+        &ensp;request.setRequestHeader('Content-Type', 'application/json');<br/>
+        &ensp;request.send(JSON.stringify(event));<br/>
+      }
+    </code>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h4>To track a specific event (e.g., a page_view), add a script similar to the one below on each tracked page:</h4>
+    <code>
+      &lt;script type="text/javascript"&gt;<br/>
+        &ensp;$(function () {<br/>
+          &emsp;blocmetrics.report("page_view");<br/>
+        &ensp;})<br/>
+      &lt;/script&gt;
+    </code>
+  </div>
+</div>
+
+
+
+
+
+
   </div>
 </div>

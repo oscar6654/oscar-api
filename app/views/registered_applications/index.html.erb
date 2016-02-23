@@ -5,13 +5,13 @@
       <tbody>
         <thead>
           <td class="text-uppercase">Website Name</td>
-          <td class="text-uppercase">Website URL (Address)</td>
+          <td class="text-uppercase">Website url (Address)</td>
           <td> </td>
         </thead>
         <% @registered_applications.each do |website| %>
           <tr>
             <td><%= link_to website.name, website %></td>
-            <td><%= link_to website.URL, website.URL %></td>
+            <td><%= link_to website.url, website.url %></td>
             <td>
               <span class="right">
               <%= link_to " Edit", edit_registered_application_path(website), class: 'btn btn-success glyphicon glyphicon-edit' %>
