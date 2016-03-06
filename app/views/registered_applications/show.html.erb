@@ -2,7 +2,7 @@
 <p>There are <%= pluralize(@events.count,'event') %> associated with this application.</p>
 
 <%= pie_chart @registered_application.events.group(:name).count %>
-<%= line_chart @registered_application.events.group("strftime('%Y-%m-%d', Events.created_at)").count %>
+<%= line_chart @registered_application.events.group_by_day(:created_at).count %>
 
 <ul>
   <% @registered_application.events.each do |event| %>
