@@ -18,6 +18,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'faker'
+gem 'chartkick'
+gem 'groupdate'
 gem 'figaro', '1.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

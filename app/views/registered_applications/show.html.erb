@@ -1,73 +1,10 @@
-<div class="row">
-  <div class="col-md-8">
-    <h1><%= @registered_application.name %></h1>
-    <h3><%= link_to @registered_application.url, @registered_application.url, :target => "_blank" %></h3>
-  <div>
-  <div class='row'>
-    <div class='col-md-8'>
-      <table class="table table-striped">
-        <tbody>
-          <thead>
-            <td class="text-uppercase">Event Name</td>
-            <td class="text-uppercase">Event Count</td>
-          </thead>
+<h1><%= @registered_application.name %></h1>
+<p>There are <%= pluralize(@events.count,'event') %> associated with this application.</p>
 
-          <% @events.each do |name, events| %>
-            <tr>
-            <td><%= name %></td>
-            <% count = 0 %>
-              <% events.each{ |event| count += 1 } %>
-            <td><%= count %></td>
-          </tr>
-          <% end %>
+<%= pie_chart @registered_application.events.group(:name).count %>
+<%= line_chart @registered_application.events.group("strftime('%Y-%m-%d', Events.created_at)").count %>
 
-        </tbody>
-      </table>
-    </div>
-    <div class='row'>
-      <div class='col-md-8'>
-        <div class="bloc_buttons">
-          <%= link_to " Edit", edit_registered_application_path, class: 'btn btn-success glyphicon glyphicon-edit' %>
-          <%= link_to " Delete", registered_application_path, method: :delete, data: { confirm: 'Are you sure you want to delete this website?'}, id: 'delete-site', class: 'btn btn-danger glyphicon glyphicon-remove' %>
-        </div>
-          <%= link_to "Back to Website List", root_path, class: 'btn btn-primary' %>
-      </div>
-    </div>
-
-    <div class="row">
-  <div class="col-md-12">
-    <h4>To track application events add the following code to your application.js file:</h4>
-    <code>
-      var blocmetrics = {};<br/>
-      blocmetrics.report = function(eventName){<br/>
-        &ensp;var event = { name: eventName };<br/>
-        <br/>
-        &ensp;var request = new XMLHttpRequest();<br/>
-        &ensp;request.open("POST", "http://oscar-api.herokuapp.com/api/events", true);<br/>
-        &ensp;request.setRequestHeader('Content-Type', 'application/json');<br/>
-        &ensp;request.send(JSON.stringify(event));<br/>
-      }
-    </code>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h4>To track a specific event (e.g., a page_view), add a script similar to the one below on each tracked page:</h4>
-    <code>
-      &lt;script type="text/javascript"&gt;<br/>
-        &ensp;$(function () {<br/>
-          &emsp;blocmetrics.report("page_view");<br/>
-        &ensp;})<br/>
-      &lt;/script&gt;
-    </code>
-  </div>
-</div>
-
-
-
-
-
-
-  </div>
-</div>
+<ul>
+  <% @registered_application.events.each do |event| %>
+    <li><%= event.name %> || <%= event.created_at %></li>
+  <% end %>

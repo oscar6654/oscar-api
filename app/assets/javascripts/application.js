@@ -15,7 +15,8 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
-
+//= require highcharts.js
+//= require chartkick
 
 // var blocmetrics = {};
 // blocmetrics.report = function(eventName){
